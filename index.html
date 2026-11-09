@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REVIX RP - Официальный сайт многопользовательского RP проекта</title>
+    <meta name="description" content="REVIX RP (REVIX ONLINE) - новый масштабный многопользовательский RP проект для ПК и мобильных устройств. Скачать лаунчер, Discord сервер.">
+    <meta name="keywords" content="REVIX RP, REVIX ONLINE, ревикс рп, крмп, самп, rp проект, играть в revix rp">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            color: #fff;
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            background: #110601;
+            position: relative;
+        }
+
+        header {
+            width: 100%;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #0f0f0f;
+            border-bottom: 1px solid #ff6600;
+            position: fixed;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-logo {
+            font-weight: 900;
+            font-size: 1.4rem;
+            color: #ff6600;
+            cursor: pointer;
+        }
+
+        .menu-toggle {
+            width: 28px;
+            height: 20px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .menu-toggle span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background-color: #ff6600;
+            border-radius: 3px;
+        }
+
+        .slide-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(10, 10, 10, 0.98);
+            z-index: 99;
+            display: flex;
+            flex-direction: column;
+            padding: 90px 20px 20px 20px;
+            transform: translateY(-100%);
+            transition: 0.3s ease-in-out;
+        }
+
+        .slide-menu.active {
+            transform: translateY(0);
+        }
+
+        .menu-items {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-width: 400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .menu-item {
+            background: #1a1a1a;
+            padding: 15px;
+            border-radius: 10px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            text-align: center;
+            border: 1px solid #333;
+            cursor: pointer;
+        }
+
+        .main-content {
+            margin-top: 100px;
+            text-align: center;
+            padding: 20px;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .hero-title {
+            font-size: 2.8rem;
+            font-weight: 900;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        .hero-subtitle {
+            color: #ff8833;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            margin-bottom: 25px;
+        }
+
+        .soon-badge {
+            display: inline-block;
+            background: rgba(255, 85, 0, 0.2);
+            border: 2px solid #ff5500;
+            color: #ff6600;
+            padding: 15px 40px;
+            border-radius: 15px;
+            font-size: 2rem;
+            font-weight: 900;
+            letter-spacing: 4px;
+            margin-bottom: 20px;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 102, 0, 0.3);
+            border-radius: 14px;
+            padding: 18px;
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .card-step {
+            display: inline-block;
+            background: #ff6600;
+            color: #000;
+            font-size: 0.75rem;
+            font-weight: bold;
+            padding: 3px 10px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .card-title {
+            font-size: 1.15rem;
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 6px;
+        }
+
+        .card-desc {
+            font-size: 0.9rem;
+            color: #bbb;
+            line-height: 1.4;
+        }
+
+        .footer-action {
+            width: 100%;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .btn-discord {
+            width: 100%;
+            max-width: 400px;
+            padding: 15px;
+            background: #ff6600;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-logo" id="logoHome">REVIX RP</div>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </header>
+
+    <div class="slide-menu" id="slideMenu">
+        <div class="menu-items">
+            <div class="menu-item" id="btnHome">ГЛАВНАЯ</div>
+            <div class="menu-item" id="btnHowToPlay" style="border-color: #ff6600; color: #ff8833;">КАК НАЧАТЬ ИГРАТЬ</div>
+            <div class="menu-item">НОВОСТИ</div>
+            <a href="https://discord.gg/qmK9Qfkna" target="_blank" class="menu-item" style="color: #ff6600; text-decoration: none;">DISCORD СЕРВЕР</a>
+        </div>
+    </div>
+
+    <div class="main-content" id="mainContent">
+        <div class="hero-title">REVIX RP</div>
+        <div class="hero-subtitle">NEXT-GEN MULTIPLATFORM</div>
+
+        <div id="dynamicSection">
+            <div class="soon-badge">СКОРО</div>
+            <p style="color: #aaa; font-size: 0.95rem;">
+                Масштабный RP проект нового поколения. Следите за обновлениями в нашем сообществе.
+            </p>
+        </div>
+    </div>
+
+    <div class="footer-action">
+        <a href="https://discord.gg/qmK9Qfkna" target="_blank" class="btn-discord">ПРИСОЕДИНИТЬСЯ К DISCORD</a>
+    </div>
+
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const slideMenu = document.getElementById('slideMenu');
+        const dynamicSection = document.getElementById('dynamicSection');
+        const btnHome = document.getElementById('btnHome');
+        const btnHowToPlay = document.getElementById('btnHowToPlay');
+        const logoHome = document.getElementById('logoHome');
+
+        menuToggle.addEventListener('click', () => {
+            slideMenu.classList.toggle('active');
+        });
+
+        btnHowToPlay.addEventListener('click', () => {
+            slideMenu.classList.remove('active');
+            dynamicSection.innerHTML = `
+                <div class="glass-card">
+                    <span class="card-step">ЭТАП 1</span>
+                    <div class="card-title">Присоединяйтесь к Discord</div>
+                    <div class="card-desc">Перейдите в наш Discord сервер, чтобы быть в курсе всех новостей, задать вопросы и получить поддержку.</div>
+                </div>
+                <div class="glass-card">
+                    <span class="card-step">ЭТАП 2</span>
+                    <div class="card-title">Скачайте Лаунчер</div>
+                    <div class="card-desc">Игра находится в разработке. Скоро здесь появится официальная ссылка на скачивание для ПК и Android.</div>
+                </div>
+                <div class="glass-card">
+                    <span class="card-step">ЭТАП 3</span>
+                    <div class="card-title">Начните Играть</div>
+                    <div class="card-desc">Установите лаунчер, создайте своего персонажа и погрузитесь в мир REVIX RP!</div>
+                </div>
+            `;
+        });
+
+        function showHome() {
+            slideMenu.classList.remove('active');
+            dynamicSection.innerHTML = `
+                <div class="soon-badge">СКОРО</div>
+                <p style="color: #aaa; font-size: 0.95rem;">
+                    Масштабный RP проект нового поколения. Следите за обновлениями в нашем сообществе.
+                </p>
+            `;
+        }
+
+        btnHome.addEventListener('click', showHome);
+        logoHome.addEventListener('click', showHome);
+    </script>
+
+</body>
+</html>
