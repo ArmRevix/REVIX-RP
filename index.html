@@ -3,32 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>REVIX RP - Официальный сайт многопользовательского RP проекта</title>
-    <meta name="description" content="REVIX RP (REVIX ONLINE) - новый масштабный многопользовательский RP проект для ПК и мобильных устройств. Скачать лаунчер, Discord сервер.">
-    <meta name="keywords" content="REVIX RP, REVIX ONLINE, ревикс рп, крмп, самп, rp проект, играть в revix rp">
+    <title>REVIX RP - Официальный сайт</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
+            user-select: none;
+        }
         
         body {
             color: #fff;
-            font-family: Arial, sans-serif;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            align-items: center;
-            background: #110601;
+            background: #080402 url('https://images.wallpaperscraft.com/image/single/city_night_street_139982_1280x720.jpg') center/cover no-repeat fixed;
             position: relative;
+            overflow-x: hidden;
+        }
+
+        body::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(8, 4, 2, 0.88);
+            z-index: 1;
         }
 
         header {
             width: 100%;
-            padding: 15px 20px;
+            padding: 20px 60px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: #0f0f0f;
-            border-bottom: 1px solid #ff6600;
+            background: rgba(12, 12, 15, 0.95);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 102, 0, 0.35);
             position: fixed;
             top: 0;
             z-index: 100;
@@ -36,236 +51,825 @@
 
         .header-logo {
             font-weight: 900;
-            font-size: 1.4rem;
+            font-size: 1.8rem;
             color: #ff6600;
             cursor: pointer;
+            letter-spacing: 2px;
+            text-shadow: 0 0 20px rgba(255, 102, 0, 0.6);
         }
 
-        .menu-toggle {
-            width: 28px;
-            height: 20px;
-            cursor: pointer;
+        .desktop-nav {
             display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
         }
 
-        .menu-toggle span {
-            display: block;
-            height: 3px;
-            width: 100%;
-            background-color: #ff6600;
-            border-radius: 3px;
-        }
-
-        .slide-menu {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background: rgba(10, 10, 10, 0.98);
-            z-index: 99;
-            display: flex;
-            flex-direction: column;
-            padding: 90px 20px 20px 20px;
-            transform: translateY(-100%);
-            transition: 0.3s ease-in-out;
-        }
-
-        .slide-menu.active {
-            transform: translateY(0);
-        }
-
-        .menu-items {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            max-width: 400px;
-            margin: 0 auto;
-            width: 100%;
-        }
-
-        .menu-item {
-            background: #1a1a1a;
-            padding: 15px;
-            border-radius: 10px;
-            color: #fff;
+        .nav-link {
+            color: #ccc;
             text-decoration: none;
-            font-weight: bold;
-            text-align: center;
-            border: 1px solid #333;
+            font-weight: 700;
+            font-size: 1rem;
+            padding: 8px 16px;
+            border-radius: 8px;
             cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: #ff6600;
+            background: rgba(255, 102, 0, 0.12);
+        }
+
+        .admin-only {
+            display: none !important;
+        }
+        .admin-only.show {
+            display: inline-block !important;
+        }
+
+        .nav-link.admin-btn {
+            color: #ff3300;
+            border: 1px dashed rgba(255, 51, 0, 0.5);
+        }
+
+        .nav-link.op-btn {
+            background: rgba(255, 51, 0, 0.2);
+            color: #ff6600;
+            border: 1px solid #ff6600;
+            font-weight: 900;
+        }
+
+        .header-auth-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .auth-top-btn {
+            background: linear-gradient(135deg, #ff6600, #ff3300);
+            color: #fff;
+            padding: 9px 18px;
+            border-radius: 10px;
+            font-weight: 800;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 102, 0, 0.3);
+        }
+
+        .auth-top-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 102, 0, 0.5);
+        }
+
+        .user-badge {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 102, 0, 0.15);
+            border: 1px solid #ff6600;
+            padding: 6px 14px;
+            border-radius: 12px;
+            font-weight: 700;
+        }
+
+        .user-avatar {
+            width: 30px;
+            height: 30px;
+            background: #ff6600;
+            color: #000;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 900;
+            font-size: 1rem;
+        }
+
+        .logout-small-btn {
+            background: transparent;
+            border: none;
+            color: #ff5500;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-left: 5px;
+        }
+
+        .nav-discord-btn {
+            background: linear-gradient(135deg, #5865F2, #4752C4);
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-weight: 800;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(88, 101, 242, 0.4);
+            transition: all 0.3s ease;
         }
 
         .main-content {
-            margin-top: 100px;
-            text-align: center;
+            margin: 130px auto 40px auto;
             padding: 20px;
             width: 100%;
-            max-width: 500px;
+            max-width: 1000px;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+        }
+
+        .hero-section {
+            text-align: center;
+            margin-bottom: 30px;
+            width: 100%;
         }
 
         .hero-title {
-            font-size: 2.8rem;
+            font-size: 3.8rem;
             font-weight: 900;
             color: #fff;
             margin-bottom: 5px;
+            letter-spacing: 3px;
+            text-shadow: 0 0 30px rgba(255, 102, 0, 0.5);
         }
 
         .hero-subtitle {
             color: #ff8833;
-            font-size: 0.9rem;
-            letter-spacing: 2px;
+            font-size: 1.1rem;
+            letter-spacing: 4px;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+
+        .soon-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
             margin-bottom: 25px;
         }
 
         .soon-badge {
             display: inline-block;
-            background: rgba(255, 85, 0, 0.2);
+            background: linear-gradient(135deg, rgba(255, 85, 0, 0.25), rgba(255, 136, 0, 0.1));
             border: 2px solid #ff5500;
             color: #ff6600;
-            padding: 15px 40px;
-            border-radius: 15px;
+            padding: 12px 35px;
+            border-radius: 16px;
             font-size: 2rem;
             font-weight: 900;
             letter-spacing: 4px;
-            margin-bottom: 20px;
+            box-shadow: 0 0 35px rgba(255, 85, 0, 0.35);
         }
 
-        .glass-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 102, 0, 0.3);
-            border-radius: 14px;
-            padding: 18px;
-            margin-bottom: 15px;
+        .notify-btn {
+            background: linear-gradient(135deg, #ff6600, #ff3300);
+            color: #fff;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 800;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 102, 0, 0.4);
+            transition: all 0.3s ease;
+        }
+        .notify-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 102, 0, 0.6);
+        }
+        .notify-btn.disabled {
+            background: #333;
+            color: #777;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(8px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-box {
+            background: rgba(18, 18, 24, 0.95);
+            border: 1px solid rgba(255, 102, 0, 0.5);
+            border-radius: 20px;
+            padding: 35px;
+            max-width: 420px;
+            width: 90%;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            position: relative;
             text-align: left;
         }
 
-        .card-step {
-            display: inline-block;
-            background: #ff6600;
-            color: #000;
-            font-size: 0.75rem;
-            font-weight: bold;
-            padding: 3px 10px;
-            border-radius: 8px;
-            margin-bottom: 8px;
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.5rem;
+            color: #888;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .modal-close:hover {
+            color: #ff6600;
+        }
+
+        .modal-title {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #ff6600;
+            margin-bottom: 20px;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        .input-group {
+            margin-bottom: 16px;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 0.8rem;
+            color: #aaa;
+            margin-bottom: 6px;
+            font-weight: 700;
             text-transform: uppercase;
         }
 
+        .input-group input {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(10, 10, 13, 0.9);
+            border: 1px solid #332211;
+            border-radius: 10px;
+            color: white;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .input-group input:focus {
+            border-color: #ff6600;
+            box-shadow: 0 0 10px rgba(255, 102, 0, 0.3);
+        }
+
+        .auth-submit-btn {
+            background: linear-gradient(135deg, #ff6600, #ff3300);
+            color: white;
+            border: none;
+            padding: 14px;
+            font-size: 1.05rem;
+            font-weight: 800;
+            border-radius: 10px;
+            cursor: pointer;
+            width: 100%;
+            box-shadow: 0 6px 20px rgba(255, 102, 0, 0.4);
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            text-transform: uppercase;
+        }
+
+        .auth-submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 102, 0, 0.6);
+        }
+
+        .modal-switch {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        .modal-switch span {
+            color: #ff6600;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            width: 100%;
+            text-align: left;
+        }
+
+        .glass-card {
+            background: rgba(20, 20, 26, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 102, 0, 0.3);
+            border-radius: 16px;
+            padding: 24px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            border-color: #ff6600;
+            box-shadow: 0 12px 35px rgba(255, 102, 0, 0.3);
+        }
+
+        .card-tag {
+            align-self: flex-start;
+            background: linear-gradient(135deg, #ff6600, #ff4400);
+            color: #fff;
+            font-size: 0.75rem;
+            font-weight: 800;
+            padding: 4px 12px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            box-shadow: 0 3px 10px rgba(255, 102, 0, 0.4);
+        }
+
         .card-title {
-            font-size: 1.15rem;
+            font-size: 1.2rem;
             font-weight: bold;
             color: #fff;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
         }
 
         .card-desc {
-            font-size: 0.9rem;
+            font-size: 0.92rem;
             color: #bbb;
-            line-height: 1.4;
+            line-height: 1.5;
         }
 
-        .footer-action {
+        footer {
             width: 100%;
-            padding: 20px;
+            padding: 25px 60px;
+            background: rgba(10, 10, 13, 0.95);
+            border-top: 1px solid rgba(255, 102, 0, 0.2);
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 2;
         }
 
-        .btn-discord {
-            width: 100%;
-            max-width: 400px;
-            padding: 15px;
-            background: #ff6600;
+        .footer-text {
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        .footer-discord-btn {
+            background: linear-gradient(135deg, #ff6600, #e05500);
             color: white;
             text-decoration: none;
-            font-weight: bold;
+            font-weight: 800;
+            padding: 12px 28px;
             border-radius: 12px;
-            text-align: center;
-            font-size: 1.1rem;
+            font-size: 1rem;
+            box-shadow: 0 6px 20px rgba(255, 102, 0, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .footer-discord-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 102, 0, 0.6);
         }
     </style>
 </head>
-<body>
+    <body>
 
     <header>
         <div class="header-logo" id="logoHome">REVIX RP</div>
-        <div class="menu-toggle" id="menuToggle">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
+        <nav class="desktop-nav">
+            <div class="nav-link active" id="btnHome">ГЛАВНАЯ</div>
+            <div class="nav-link" id="btnHowToPlay">КАК НАЧАТЬ ИГРАТЬ</div>
+            <div class="nav-link" id="btnNews">НОВОСТИ</div>
+            <!-- ADMINS և OP կոճակներ, որոնք երևում են միայն Admin / Admins-ին -->
+            <div class="nav-link admin-btn admin-only" id="btnAdmin">ADMINS</div>
+            <div class="nav-link op-btn admin-only" id="btnOp">OP: 0</div>
+            
+            <!-- Վերևի աջ անկյունում՝ Օգտատեր կամ Մուտք/Գրանցում կոճակներ -->
+            <div class="header-auth-group" id="headerAuthGroup"></div>
+
+            <a href="https://discord.gg/u6NAar7j2" target="_blank" class="nav-discord-btn">DISCORD СЕРВЕР</a>
+        </nav>
     </header>
 
-    <div class="slide-menu" id="slideMenu">
-        <div class="menu-items">
-            <div class="menu-item" id="btnHome">ГЛАВНАЯ</div>
-            <div class="menu-item" id="btnHowToPlay" style="border-color: #ff6600; color: #ff8833;">КАК НАЧАТЬ ИГРАТЬ</div>
-            <div class="menu-item">НОВОСТИ</div>
-            <a href="https://discord.gg/qmK9Qfkna" target="_blank" class="menu-item" style="color: #ff6600; text-decoration: none;">DISCORD СЕРВЕР</a>
-        </div>
-    </div>
-
     <div class="main-content" id="mainContent">
-        <div class="hero-title">REVIX RP</div>
-        <div class="hero-subtitle">NEXT-GEN MULTIPLATFORM</div>
+        <div class="hero-section" id="heroSection">
+            <div class="hero-title">REVIX RP</div>
+            <div class="hero-subtitle">NEXT-GEN MULTIPLATFORM</div>
+            
+            <div class="soon-container">
+                <div class="soon-badge">СКОРО открытие</div>
+                <!-- Տեղյակ լինել կոճակ (Быть в курсе) -->
+                <button class="notify-btn" id="notifyBtn">Быть в курсе</button>
+            </div>
 
-        <div id="dynamicSection">
-            <div class="soon-badge">СКОРО</div>
-            <p style="color: #aaa; font-size: 0.95rem;">
-                Масштабный RP проект нового поколения. Следите за обновлениями в нашем сообществе.
+            <p style="color: #bbb; font-size: 1.05rem; line-height: 1.6; max-width: 700px; margin: 0 auto;">
+                Масштабный многопользовательский RP проект нового поколения для ПК и мобильных устройств. Уникальный игровой мир, продвинутая экономика и полная свобода действий.
             </p>
         </div>
+
+        <div class="content-grid" id="dynamicGrid">
+            <div class="glass-card">
+                <div>
+                    <span class="card-tag">О ПРОЕКТЕ</span>
+                    <div class="card-title">Открытый Мир</div>
+                    <div class="card-desc">Погрузитесь в детально проработанную атмосферу с современными кастомными моделями транспорта и скинов.</div>
+                </div>
+            </div>
+            <div class="glass-card">
+                <div>
+                    <span class="card-tag">МУЛЬТИПЛАТФОРМА</span>
+                    <div class="card-title">ПК и Android</div>
+                    <div class="card-desc">Играйте вместе с друзьями с любого удобного устройства благодаря оптимизированному кроссплей лаунчеру.</div>
+                </div>
+            </div>
+            <div class="glass-card">
+                <div>
+                    <span class="card-tag">ЭКОНОМИКА</span>
+                    <div class="card-title">Честный RP</div>
+                    <div class="card-desc">Сбалансированная игровая экономика, работы, бизнесы и множество возможностей для каждого игрока.</div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="footer-action">
-        <a href="https://discord.gg/qmK9Qfkna" target="_blank" class="btn-discord">ПРИСОЕДИНИТЬСЯ К DISCORD</a>
+    <!-- Գրանցման Պատուհան (Modal) -->
+    <div class="modal-overlay" id="registerModal">
+        <div class="modal-box">
+            <span class="modal-close" id="closeRegModal">&times;</span>
+            <div class="modal-title">РЕГИСТРАЦИЯ АККАУНТА</div>
+            <div class="input-group">
+                <label>Ваш Никнейм (Латиница, с большой буквы)</label>
+                <input type="text" id="regName" placeholder="">
+            </div>
+            <div class="input-group">
+                <label>Пароль (Латиница)</label>
+                <input type="password" id="regPass" placeholder="">
+            </div>
+            <div class="input-group">
+                <label>Повторите пароль</label>
+                <input type="password" id="regPassRepeat" placeholder="">
+            </div>
+            <button class="auth-submit-btn" id="submitRegBtn">ЗАРЕГИСТРИРОВАТЬСЯ</button>
+            <div class="modal-switch">
+                Уже есть аккаунт? <span id="switchToLogin">Войти</span>
+            </div>
+        </div>
     </div>
+
+    <!-- Մուտքի Պատուհան (Modal) -->
+    <div class="modal-overlay" id="loginModal">
+        <div class="modal-box">
+            <span class="modal-close" id="closeLoginModal">&times;</span>
+            <div class="modal-title">ВХОД В АККАУНТ</div>
+            <div class="input-group">
+                <label>Ваш Никнейм</label>
+                <input type="text" id="loginName" placeholder="">
+            </div>
+            <div class="input-group">
+                <label>Пароль</label>
+                <input type="password" id="loginPass" placeholder="">
+            </div>
+            <button class="auth-submit-btn" id="submitLoginBtn">ВОЙТИ</button>
+            <div class="modal-switch">
+                Нет аккаунта? <span id="switchToRegister">Зарегистрироваться</span>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-text">© 2026 REVIX RP. All rights reserved.</div>
+        <a href="https://discord.gg/u6NAar7j2" target="_blank" class="footer-discord-btn">ПРИСОЕДИНИТЬСЯ К DISCORD</a>
+    </footer>
 
     <script>
-        const menuToggle = document.getElementById('menuToggle');
-        const slideMenu = document.getElementById('slideMenu');
-        const dynamicSection = document.getElementById('dynamicSection');
+        const heroSection = document.getElementById('heroSection');
+        const dynamicGrid = document.getElementById('dynamicGrid');
         const btnHome = document.getElementById('btnHome');
         const btnHowToPlay = document.getElementById('btnHowToPlay');
+        const btnNews = document.getElementById('btnNews');
+        const btnAdmin = document.getElementById('btnAdmin');
+        const btnOp = document.getElementById('btnOp');
         const logoHome = document.getElementById('logoHome');
+        const navLinks = document.querySelectorAll('.nav-link');
 
-        menuToggle.addEventListener('click', () => {
-            slideMenu.classList.toggle('active');
+        function checkNotifyStatus() {
+            const notifyBtn = document.getElementById('notifyBtn');
+            if (!notifyBtn) return;
+
+            const hasClicked = localStorage.getItem('revix_notify_clicked');
+
+            if (hasClicked === 'true') {
+                notifyBtn.textContent = 'Вы уже подписаны ✔';
+                notifyBtn.classList.add('disabled');
+            } else {
+                notifyBtn.textContent = 'Быть в курсе';
+                notifyBtn.classList.remove('disabled');
+            }
+        }
+
+        function updateHeaderAuth() {
+            const authGroup = document.getElementById('headerAuthGroup');
+            const loggedUser = localStorage.getItem('revix_logged_user');
+            const adminElements = document.querySelectorAll('.admin-only');
+
+            if (loggedUser) {
+                const firstLetter = loggedUser.charAt(0).toUpperCase();
+                authGroup.innerHTML = `
+                    <div class="user-badge">
+                        <div class="user-avatar">${firstLetter}</div>
+                        <span>${loggedUser}</span>
+                        <button class="logout-small-btn" id="logoutBtn">Выйти</button>
+                    </div>
+                `;
+
+                // Թույլ ենք տալիս և՛ "Admin", և՛ "Admins" անունների դեպքում
+                if (loggedUser === 'Admin' || loggedUser === 'Admins') {
+                    adminElements.forEach(el => el.classList.add('show'));
+                    updateOpCounter();
+                } else {
+                    adminElements.forEach(el => el.classList.remove('show'));
+                }
+
+                document.getElementById('logoutBtn').addEventListener('click', () => {
+                    localStorage.removeItem('revix_logged_user');
+                    adminElements.forEach(el => el.classList.remove('show'));
+                    updateHeaderAuth();
+                });
+            } else {
+                adminElements.forEach(el => el.classList.remove('show'));
+                authGroup.innerHTML = `
+                    <button class="auth-top-btn" id="openLoginBtn">ВХОД</button>
+                    <button class="auth-top-btn" id="openRegBtn">РЕГИСТРАЦИЯ</button>
+                `;
+
+                document.getElementById('openLoginBtn').addEventListener('click', () => {
+                    document.getElementById('loginModal').classList.add('active');
+                });
+                document.getElementById('openRegBtn').addEventListener('click', () => {
+                    document.getElementById('registerModal').classList.add('active');
+                });
+            }
+            checkNotifyStatus();
+        }
+
+        function updateOpCounter() {
+            let count = localStorage.getItem('revix_notify_count');
+            if (!count) count = 0;
+            if (btnOp) {
+                btnOp.textContent = `OP: ${count}`;
+            }
+        }
+
+        document.addEventListener('click', function(e) {
+            if (e.target && e.target.id === 'notifyBtn') {
+                const loggedUser = localStorage.getItem('revix_logged_user');
+                if (!loggedUser) {
+                    alert('Пожалуйста, войдите в аккаунт, чтобы нажать эту кнопку!');
+                    document.getElementById('loginModal').classList.add('active');
+                    return;
+                }
+
+                if (localStorage.getItem('revix_notify_clicked') === 'true') {
+                    alert('Вы уже нажали эту кнопку!');
+                    return;
+                }
+
+                let count = localStorage.getItem('revix_notify_count');
+                if (!count) count = 0;
+                count = parseInt(count) + 1;
+
+                localStorage.setItem('revix_notify_count', count);
+                localStorage.setItem('revix_notify_clicked', 'true');
+
+                checkNotifyStatus();
+                updateOpCounter();
+                alert('Спасибо! Вы будете в курсе всех новостей.');
+            }
         });
 
-        btnHowToPlay.addEventListener('click', () => {
-            slideMenu.classList.remove('active');
-            dynamicSection.innerHTML = `
+        function setupAuthSystem() {
+            updateHeaderAuth();
+
+            const registerModal = document.getElementById('registerModal');
+            const loginModal = document.getElementById('loginModal');
+
+            document.getElementById('closeRegModal').addEventListener('click', () => registerModal.classList.remove('active'));
+            document.getElementById('closeLoginModal').addEventListener('click', () => loginModal.classList.remove('active'));
+
+            document.getElementById('switchToLogin').addEventListener('click', () => {
+                registerModal.classList.remove('active');
+                loginModal.classList.add('active');
+            });
+
+            document.getElementById('switchToRegister').addEventListener('click', () => {
+                loginModal.classList.remove('active');
+                registerModal.classList.add('active');
+            });
+
+            document.getElementById('submitRegBtn').addEventListener('click', () => {
+                const name = document.getElementById('regName').value.trim();
+                const pass = document.getElementById('regPass').value.trim();
+                const passRepeat = document.getElementById('regPassRepeat').value.trim();
+
+                if (!name || !pass || !passRepeat) {
+                    alert('Пожалуйста, заполните все поля!');
+                    return;
+                }
+
+                const latinNameRegex = /^[A-Z][A-Za-z0-9_]*$/;
+                if (!latinNameRegex.test(name)) {
+                    alert('Никнейм должен быть на латинице и начинаться с БОЛЬШОЙ буквы (например: Manuk)!');
+                    return;
+                }
+
+                if (localStorage.getItem('revix_db_pass_' + name)) {
+                    alert('Аккаунт с таким никнеймом уже существует! Пожалуйста, войдите в систему.');
+                    registerModal.classList.remove('active');
+                    loginModal.classList.add('active');
+                    return;
+                }
+
+                const latinPassRegex = /^[A-Za-z0-9_@#$!%*?&]+$/;
+                if (!latinPassRegex.test(pass)) {
+                    alert('Пароль должен содержать только латинские буквы и цифры!');
+                    return;
+                }
+
+                if (pass !== passRepeat) {
+                    alert('Пароли не совпадают!');
+                    return;
+                }
+
+                localStorage.setItem('revix_db_pass_' + name, pass);
+                localStorage.setItem('revix_logged_user', name);
+
+                alert(`Аккаунт ${name} успешно создан и выполнен вход!`);
+                registerModal.classList.remove('active');
+                updateHeaderAuth();
+            });
+
+            document.getElementById('submitLoginBtn').addEventListener('click', () => {
+                const name = document.getElementById('loginName').value.trim();
+                const pass = document.getElementById('loginPass').value.trim();
+
+                if (!name || !pass) {
+                    alert('Пожалуйста, заполните все поля!');
+                    return;
+                }
+
+                const savedPass = localStorage.getItem('revix_db_pass_' + name);
+                if (!savedPass || savedPass !== pass) {
+                    alert('Неверный никнейм или пароль!');
+                    return;
+                }
+
+                localStorage.setItem('revix_logged_user', name);
+                alert(`Добро пожаловать, ${name}!`);
+                loginModal.classList.remove('active');
+                updateHeaderAuth();
+            });
+        }
+
+        setupAuthSystem();
+
+        btnHowToPlay.addEventListener('click', function() {
+            navLinks.forEach(link => link.classList.remove('active'));
+            btnHowToPlay.classList.add('active');
+
+            heroSection.innerHTML = `
+                <div class="hero-title" style="font-size: 3rem;">КАК НАЧАТЬ ИГРАТЬ</div>
+                <div class="hero-subtitle">ПОШАГОВОЕ РУКОВОДСТВО</div>
+            `;
+            dynamicGrid.innerHTML = `
                 <div class="glass-card">
-                    <span class="card-step">ЭТАП 1</span>
-                    <div class="card-title">Присоединяйтесь к Discord</div>
-                    <div class="card-desc">Перейдите в наш Discord сервер, чтобы быть в курсе всех новостей, задать вопросы и получить поддержку.</div>
+                    <div>
+                        <span class="card-tag">ЭТАП 1</span>
+                        <div class="card-title">Discord Сервер</div>
+                        <div class="card-desc">Присоединяйтесь к нашему Discord сообществу, чтобы быть в курсе всех новостей и обновлений.</div>
+                    </div>
                 </div>
                 <div class="glass-card">
-                    <span class="card-step">ЭТАП 2</span>
-                    <div class="card-title">Скачайте Лаунчер</div>
-                    <div class="card-desc">Игра находится в разработке. Скоро здесь появится официальная ссылка на скачивание для ПК и Android.</div>
+                    <div>
+                        <span class="card-tag">ЭТАП 2</span>
+                        <div class="card-title">Скачайте Лаунчер</div>
+                        <div class="card-desc">Скоро здесь появится официальная ссылка на скачивание лаунчера для ПК и Android устройств.</div>
+                    </div>
                 </div>
                 <div class="glass-card">
-                    <span class="card-step">ЭТАП 3</span>
-                    <div class="card-title">Начните Играть</div>
-                    <div class="card-desc">Установите лаунчер, создайте своего персонажа и погрузитесь в мир REVIX RP!</div>
+                    <div>
+                        <span class="card-tag">ЭТАП 3</span>
+                        <div class="card-title">Начните Игру</div>
+                        <div class="card-desc">Запустите игру, выберите сервер, придумайте никнейм и начните свой путь в мире REVIX RP!</div>
+                    </div>
                 </div>
             `;
         });
 
         function showHome() {
-            slideMenu.classList.remove('active');
-            dynamicSection.innerHTML = `
-                <div class="soon-badge">СКОРО</div>
-                <p style="color: #aaa; font-size: 0.95rem;">
-                    Масштабный RP проект нового поколения. Следите за обновлениями в нашем сообществе.
+            navLinks.forEach(link => link.classList.remove('active'));
+            btnHome.classList.add('active');
+
+            heroSection.innerHTML = `
+                <div class="hero-title">REVIX RP</div>
+                <div class="hero-subtitle">NEXT-GEN MULTIPLATFORM</div>
+                
+                <div class="soon-container">
+                    <div class="soon-badge">СКОРО открытие</div>
+                    <button class="notify-btn" id="notifyBtn">Быть в курсе</button>
+                </div>
+
+                <p style="color: #bbb; font-size: 1.05rem; line-height: 1.6; max-width: 700px; margin: 0 auto;">
+                    Масштабный многопользовательский RP проект нового поколения для ПК и мобильных устройств. Уникальный игровой мир, продвинутая экономика и полная свобода действий.
                 </p>
             `;
+
+            dynamicGrid.innerHTML = `
+                <div class="glass-card">
+                    <div>
+                        <span class="card-tag">О ПРОЕКТЕ</span>
+                        <div class="card-title">Открытый Мир</div>
+                        <div class="card-desc">Погрузитесь в детально проработанную атмосферу с современными кастомными моделями транспорта и скинов.</div>
+                    </div>
+                </div>
+                <div class="glass-card">
+                    <div>
+                        <span class="card-tag">МУЛЬТИПЛАТФОРМА</span>
+                        <div class="card-title">ПК и Android</div>
+                        <div class="card-desc">Играйте вместе с друзьями с любого удобного устройства благодаря оптимизированному кроссплей лаунчеру.</div>
+                    </div>
+                </div>
+                <div class="glass-card">
+                    <div>
+                        <span class="card-tag">ЭКОНОМИКА</span>
+                        <div class="card-title">Честный RP</div>
+                        <div class="card-desc">Сбалансированная игровая экономика, работы, бизнесы и множество возможностей для каждого игрока.</div>
+                    </div>
+                </div>
+            `;
+            checkNotifyStatus();
         }
+
+        btnNews.addEventListener('click', function() {
+            navLinks.forEach(link => link.classList.remove('active'));
+            btnNews.classList.add('active');
+
+            heroSection.innerHTML = `
+                <div class="hero-title" style="font-size: 3rem;">НОВОСТИ ПРОЕКТА</div>
+                <div class="hero-subtitle">АКТУАЛЬНЫЕ СОБЫТИЯ</div>
+            `;
+            dynamicGrid.innerHTML = `
+                <div class="glass-card" style="grid-column: span 3; text-align: center; padding: 40px;">
+                    <span class="card-tag">АНОНС</span>
+                    <div class="card-title" style="font-size: 1.5rem; color: #ff6600; margin-top: 10px;">Разработка идет полным ходом!</div>
+                    <p class="card-desc" style="max-width: 700px; margin: 10px auto 0 auto; font-size: 1.05rem;">
+                        Всю информацию о разработке мода, лаунчера и открытии сервера мы публикуем в нашем Discord сообществе. Подписывайтесь, чтобы ничего не пропустить!
+                    </p>
+                </div>
+            `;
+        });
+
+        btnAdmin.addEventListener('click', function() {
+            navLinks.forEach(link => link.classList.remove('active'));
+            btnAdmin.classList.add('active');
+
+            heroSection.innerHTML = `
+                <div class="hero-title" style="font-size: 3rem;">ПАНЕЛЬ АДМИНИСТРАТОРА</div>
+                <div class="hero-subtitle">УПРАВЛЕНИЕ ПРОЕКТОМ</div>
+            `;
+            dynamicGrid.innerHTML = `
+                <div class="glass-card" style="grid-column: span 3; text-align: center; padding: 40px;">
+                    <span class="card-tag">ADMIN PANEL</span>
+                    <div class="card-title" style="font-size: 1.5rem; color: #ff3300; margin-top: 10px;">Добро пожаловать, Администратор!</div>
+                    <p class="card-desc" style="max-width: 700px; margin: 10px auto 0 auto; font-size: 1.05rem;">
+                        Здесь в будущем будут отображаться инструменты управления игроками, логами и настройками сервера REVIX RP.
+                    </p>
+                </div>
+            `;
+        });
+
+        btnOp.addEventListener('click', function() {
+            let count = localStorage.getItem('revix_notify_count') || 0;
+            alert(`Статистика: кнопку «Быть в курсе» нажали ${count} пользователей.`);
+        });
 
         btnHome.addEventListener('click', showHome);
         logoHome.addEventListener('click', showHome);
