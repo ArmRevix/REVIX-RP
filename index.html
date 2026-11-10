@@ -3,7 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>REVIX RP - Официальный сайт</title>
+    <title>REVIX RP — Официальный сайт</title>
+    
+    <!-- Կայքի լոգոն և իկոնկան բրաուզերի և հեռախոսների համար -->
+    <link rel="icon" type="image/png" href="">
+    <link rel="apple-touch-icon" href="">
+
     <style>
         * { 
             margin: 0; 
@@ -451,7 +456,7 @@
         }
     </style>
 </head>
-    <body>
+<body>
 
     <header>
         <div class="header-logo" id="logoHome">REVIX RP</div>
@@ -601,7 +606,6 @@
                     </div>
                 `;
 
-                // Թույլ ենք տալիս և՛ "Admin", և՛ "Admins" անունների դեպքում
                 if (loggedUser === 'Admin' || loggedUser === 'Admins') {
                     adminElements.forEach(el => el.classList.add('show'));
                     updateOpCounter();
